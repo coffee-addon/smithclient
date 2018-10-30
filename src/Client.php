@@ -34,12 +34,28 @@ class Client
     private $recordid = null;
 
     /**
+     * @var string
+     */
+    private $projectname;
+
+    /**
+     * @var string
+     */
+    private $taskname;
+
+    /**
+     * @var string
+     */
+    private $author;
+
+    /**
      * Constructor
      *
+     * @param string $author
      * @param string $projectname
-     * @param string $name
+     * @param string $taskname
      */
-    public function __construct($projectname, $name)
+    public function __construct($author, $projectname, $taskname)
     {
         // Load configuration file .env
         if(!empty($_SERVER['DOCUMENT_ROOT']))
@@ -64,12 +80,13 @@ class Client
         $this->apikey = getenv('SMITH_API_KEY');
 
         // Set projectname, name
+        $this->author = $author;
         $this->projectname = $projectname;
-        $this->name = $name;
+        $this->taskname = $taskname;
     }
 
     /**
-     * Initiating test record with returning unique id
+     * Initiating monitoring record with returning unique id
      *
      * @param int|string $expectedtime
      * @return bool|int
@@ -80,8 +97,9 @@ class Client
         {
             $response = $this->client->get('start', [
                 'query' => [
+                    'author' => $this->author,
                     'project' => $this->projectname,
-                    'name' => $this->name,
+                    'taskname' => $this->taskname,
                     'expected_time' => $expectedtime,
                     'apikey' => $this->apikey
                 ]
@@ -109,15 +127,13 @@ class Client
     {
         try
         {
-            $response = $this->client->get('comment', [
+            $this->client->get('comment', [
                 'query' => [
                     'id' => $this->recordid,
                     'comment' => $comment,
                     'apikey' => $this->apikey
                 ]
             ]);
-
-            $returnobject = json_decode($response->getBody()->getContents());
 
             return true;
         }
@@ -137,15 +153,13 @@ class Client
     {
         try
         {
-            $response = $this->client->get('finish', [
+            $this->client->get('finish', [
                 'query' => [
                     'id' => $this->recordid,
                     'comment' => $comment,
                     'apikey' => $this->apikey
                 ]
             ]);
-
-            $returnobject = json_decode($response->getBody()->getContents());
 
             return true;
         }
@@ -165,15 +179,13 @@ class Client
     {
         try
         {
-            $response = $this->client->get('fail', [
+            $this->client->get('fail', [
                 'query' => [
                     'id' => $this->recordid,
                     'comment' => $comment,
                     'apikey' => $this->apikey
                 ]
             ]);
-
-            $returnobject = json_decode($response->getBody()->getContents());
 
             return true;
         }
