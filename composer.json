@@ -1,0 +1,22 @@
+{
+    "name": "monitoring/smithclient",
+    "description": "Client for a monitoring aggregation system",
+    "type": "library",
+    "authors": [
+        {
+            "name": "igor",
+            "email": "igor875126@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "vlucas/phpdotenv": "^2.5"
+    },
+    "license": "Meloman Company Copyright",
+    "autoload": {
+        "psr-0": {
+            "Client": "src/"
+        }
+    }
+}
