@@ -15,8 +15,8 @@
     },
     "license": "proprietary",
     "autoload": {
-        "psr-0": {
-            "Client": "src/"
+        "psr-4": {
+            "Monitoring\\Client\\": "src/"
         }
     }
 }
