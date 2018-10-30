@@ -11,8 +11,8 @@ namespace Monitoring\Smith;
 use Dotenv\Dotenv;
 
 /**
- * Class MonyaClient
- * @package Mwpg\MonyaClient
+ * Class Client
+ * @package monitoring/smithclient
  */
 class Client
 {
@@ -34,7 +34,8 @@ class Client
     private $recordid = null;
 
     /**
-     * MonyaClient constructor.
+     * Constructor
+     *
      * @param string $projectname
      * @param string $name
      */
