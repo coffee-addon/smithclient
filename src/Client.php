@@ -60,12 +60,12 @@ class Client
         // Load configuration file .env
         if(!empty($_SERVER['DOCUMENT_ROOT']))
         {
-            $dotenv = new Dotenv($_SERVER['DOCUMENT_ROOT']);
+            $dotenv = Dotenv::create($_SERVER['DOCUMENT_ROOT']);
         }
         else
         {
             // Used for laravel projects
-            $dotenv = new Dotenv(getcwd());
+            $dotenv = Dotenv::create(getcwd());
         }
         $dotenv->load();
 
